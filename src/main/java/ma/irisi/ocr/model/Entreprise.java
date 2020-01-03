@@ -1,0 +1,67 @@
+package ma.irisi.ocr.model; /***********************************************************************
+ * Module:  Entreprise.java
+ * Author:  samoou
+ * Purpose: Defines the Class Entreprise
+ ***********************************************************************/
+
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import java.util.*;
+
+public class Entreprise {
+   private Long id;
+   private String name;
+   @OneToMany
+   public List<User> user;
+   @ManyToOne
+   public Plan plan;
+   @OneToMany
+   public List<UploadedFile> uploadedFile;
+
+   public Entreprise(Long id, String name, List user, Plan plan) {
+      this.id = id;
+      this.name = name;
+      this.user = user;
+      this.plan = plan;
+   }
+
+   public Long getId() {
+      return id;
+   }
+
+   public void setId(Long id) {
+      this.id = id;
+   }
+
+   public String getName() {
+      return name;
+   }
+
+   public void setName(String name) {
+      this.name = name;
+   }
+
+   public List getUser() {
+      return user;
+   }
+
+   public void setUser(List user) {
+      this.user = user;
+   }
+
+   public Plan getPlan() {
+      return plan;
+   }
+
+   public void setPlan(Plan plan) {
+      this.plan = plan;
+   }
+
+   public List<UploadedFile> getUploadedFile() {
+      return uploadedFile;
+   }
+
+   public void setUploadedFile(List<UploadedFile> uploadedFile) {
+      this.uploadedFile = uploadedFile;
+   }
+}
