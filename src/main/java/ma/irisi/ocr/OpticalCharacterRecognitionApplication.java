@@ -7,6 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class OpticalCharacterRecognitionApplication {
 
     public static void main(String[] args) {
+        
         SpringApplication.run(OpticalCharacterRecognitionApplication.class, args);
     }
 
