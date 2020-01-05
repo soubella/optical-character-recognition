@@ -13,7 +13,7 @@ public class Plan {
    private Long id;
    private String name;
    private Double price;
-   @OneToMany
+   @OneToMany(mappedBy = "plan")
    List<Entreprise> entreprises;
 
    public Plan() {

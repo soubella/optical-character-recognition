@@ -17,7 +17,7 @@ public class UploadedFile {
 
    @ManyToOne
    private Entreprise entreprise;
-   @OneToMany
+   @OneToMany(mappedBy = "uploadedFile")
    public List<MetaData> metaData;
 
    public UploadedFile() {

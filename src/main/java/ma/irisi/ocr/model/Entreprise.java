@@ -17,7 +17,7 @@ public class Entreprise {
    public List<User> user;
    @ManyToOne
    public Plan plan;
-   @OneToMany
+   @OneToMany(mappedBy = "entreprise")
    public List<UploadedFile> uploadedFile;
 
    public Entreprise() {

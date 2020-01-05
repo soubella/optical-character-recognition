@@ -18,7 +18,7 @@ public class User {
    private String email;
    private String password;
    private boolean state;
-   @OneToOne
+   @ManyToOne
    private Role role;
    @ManyToOne
    private  Entreprise entreprise;
