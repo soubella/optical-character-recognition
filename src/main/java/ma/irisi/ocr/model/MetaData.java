@@ -13,18 +13,18 @@ public class MetaData {
    @Id
    @GeneratedValue(strategy= GenerationType.AUTO)
    private Long id;
-   private String key;
-   private String value;
+   private String keyMeta;
+   private String valueMeta;
    @ManyToOne
    private UploadedFile uploadedFile;
 
    public MetaData() {
    }
 
-   public MetaData(Long id, String key, String value) {
+   public MetaData(Long id, String keyMeta, String valueMeta) {
       this.id = id;
-      this.key = key;
-      this.value = value;
+      this.keyMeta = keyMeta;
+      this.valueMeta = valueMeta;
    }
 
    public Long getId() {
@@ -35,20 +35,20 @@ public class MetaData {
       this.id = id;
    }
 
-   public String getKey() {
-      return key;
+   public String getKeyMeta() {
+      return keyMeta;
    }
 
-   public void setKey(String key) {
-      this.key = key;
+   public void setKeyMeta(String key) {
+      this.keyMeta = key;
    }
 
-   public String getValue() {
-      return value;
+   public String getValueMeta() {
+      return valueMeta;
    }
 
-   public void setValue(String value) {
-      this.value = value;
+   public void setValueMeta(String value) {
+      this.valueMeta = value;
    }
 
    public UploadedFile getUploadedFile() {

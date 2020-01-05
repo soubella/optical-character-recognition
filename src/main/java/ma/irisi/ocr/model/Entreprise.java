@@ -13,7 +13,7 @@ public class Entreprise {
    @GeneratedValue(strategy= GenerationType.AUTO)
    private Long id;
    private String name;
-   @OneToMany
+   @OneToMany(mappedBy = "entreprise")
    public List<User> user;
    @ManyToOne
    public Plan plan;

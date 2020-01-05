@@ -60,4 +60,12 @@ public class UploadedFile {
    public void setMetaData(List<MetaData> metaData) {
       this.metaData = metaData;
    }
+
+   public Entreprise getEntreprise() {
+      return entreprise;
+   }
+
+   public void setEntreprise(Entreprise entreprise) {
+      this.entreprise = entreprise;
+   }
 }
