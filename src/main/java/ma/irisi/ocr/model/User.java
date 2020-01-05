@@ -15,8 +15,13 @@ public class User {
    private Long id;
    private String firstName;
    private String lastName;
+   private String email;
+   private String password;
+   private boolean state;
    @OneToOne
-   public Account account;
+   private Role role;
+   @ManyToOne
+   private  Entreprise entreprise;
 
    public User() {
    }
@@ -45,18 +50,43 @@ public class User {
       this.lastName = lastName;
    }
 
-   public Account getAccount() {
-      return account;
+   public String getEmail() {
+      return email;
    }
 
-   public void setAccount(Account account) {
-      this.account = account;
+   public void setEmail(String email) {
+      this.email = email;
    }
 
-   public User(Long id, String firstName, String lastName, Account account) {
-      this.id = id;
-      this.firstName = firstName;
-      this.lastName = lastName;
-      this.account = account;
+   public String getPassword() {
+      return password;
+   }
+
+   public void setPassword(String password) {
+      this.password = password;
+   }
+
+   public boolean isState() {
+      return state;
+   }
+
+   public void setState(boolean state) {
+      this.state = state;
+   }
+
+   public Role getRole() {
+      return role;
+   }
+
+   public void setRole(Role role) {
+      this.role = role;
+   }
+
+   public Entreprise getEntreprise() {
+      return entreprise;
+   }
+
+   public void setEntreprise(Entreprise entreprise) {
+      this.entreprise = entreprise;
    }
 }

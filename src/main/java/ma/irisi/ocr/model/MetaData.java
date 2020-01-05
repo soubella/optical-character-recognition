@@ -1,9 +1,6 @@
 package ma.irisi.ocr.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 /***********************************************************************
  * Module:  MetaData.java
@@ -18,6 +15,8 @@ public class MetaData {
    private Long id;
    private String key;
    private String value;
+   @ManyToOne
+   private UploadedFile uploadedFile;
 
    public MetaData() {
    }
@@ -50,5 +49,13 @@ public class MetaData {
 
    public void setValue(String value) {
       this.value = value;
+   }
+
+   public UploadedFile getUploadedFile() {
+      return uploadedFile;
+   }
+
+   public void setUploadedFile(UploadedFile uploadedFile) {
+      this.uploadedFile = uploadedFile;
    }
 }

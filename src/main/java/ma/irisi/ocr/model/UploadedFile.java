@@ -14,6 +14,9 @@ public class UploadedFile {
    private Long id;
    private String type;
    private Long size;
+
+   @ManyToOne
+   private Entreprise entreprise;
    @OneToMany
    public List<MetaData> metaData;
 

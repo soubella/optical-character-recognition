@@ -14,7 +14,7 @@ public class Role {
    private Long id;
    private String name;
    @OneToMany
-   private List<Account> accounts;
+   private List<User> users;
 
    public Role() {
    }
@@ -40,11 +40,11 @@ public class Role {
       this.name = name;
    }
 
-   public List<Account> getAccounts() {
-      return accounts;
+   public List<User> getUsers() {
+      return users;
    }
 
-   public void setAccounts(List<Account> accounts) {
-      this.accounts = accounts;
+   public void setUsers(List<User> users) {
+      this.users = users;
    }
 }
