@@ -4,14 +4,22 @@ package ma.irisi.ocr.model; /***************************************************
  * Purpose: Defines the Class User
  ***********************************************************************/
 
-import javax.persistence.OneToOne;
 
+
+import javax.persistence.*;
+
+@Entity
 public class User {
+   @Id
+   @GeneratedValue(strategy= GenerationType.AUTO)
    private Long id;
    private String firstName;
    private String lastName;
    @OneToOne
    public Account account;
+
+   public User() {
+   }
 
    public Long getId() {
       return id;

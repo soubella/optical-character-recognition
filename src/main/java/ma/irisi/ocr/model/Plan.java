@@ -4,15 +4,20 @@ package ma.irisi.ocr.model; /***************************************************
  * Purpose: Defines the Class Plan
  ***********************************************************************/
 
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.util.*;
-
+@Entity
 public class Plan {
+   @Id
+   @GeneratedValue(strategy= GenerationType.AUTO)
    private Long id;
    private String name;
    private Double price;
    @OneToMany
    List<Entreprise> entreprises;
+
+   public Plan() {
+   }
 
    public Plan(Long id, String name, Double price) {
       this.id = id;

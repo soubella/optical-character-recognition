@@ -4,11 +4,13 @@ package ma.irisi.ocr.model; /***************************************************
  * Purpose: Defines the Class Entreprise
  ***********************************************************************/
 
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.util.*;
 
+@Entity
 public class Entreprise {
+   @Id
+   @GeneratedValue(strategy= GenerationType.AUTO)
    private Long id;
    private String name;
    @OneToMany
@@ -17,6 +19,9 @@ public class Entreprise {
    public Plan plan;
    @OneToMany
    public List<UploadedFile> uploadedFile;
+
+   public Entreprise() {
+   }
 
    public Entreprise(Long id, String name, List user, Plan plan) {
       this.id = id;

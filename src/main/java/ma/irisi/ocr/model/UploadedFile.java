@@ -4,15 +4,21 @@ package ma.irisi.ocr.model; /***************************************************
  * Purpose: Defines the Class UploadedFile
  ***********************************************************************/
 
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.util.*;
 
+@Entity
 public class UploadedFile {
+   @Id
+   @GeneratedValue(strategy= GenerationType.AUTO)
    private Long id;
    private String type;
    private Long size;
    @OneToMany
    public List<MetaData> metaData;
+
+   public UploadedFile() {
+   }
 
    public UploadedFile(Long id, String type, Long size) {
       this.id = id;

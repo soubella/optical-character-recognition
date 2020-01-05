@@ -4,16 +4,21 @@ package ma.irisi.ocr.model; /***************************************************
  * Purpose: Defines the Class Compte
  ***********************************************************************/
 
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 import java.util.*;
-
+@Entity
 public class Account {
+   @Id
+   @GeneratedValue(strategy= GenerationType.AUTO)
    private Long id;
    private String email;
    private String password;
    private boolean state;
    @OneToOne
    public Role role;
+
+   public Account() {
+   }
 
    public Account(Long id, String email, String password, boolean state) {
       this.id = id;

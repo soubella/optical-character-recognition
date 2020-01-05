@@ -4,14 +4,20 @@ package ma.irisi.ocr.model; /***************************************************
  * Purpose: Defines the Class Role
  ***********************************************************************/
 
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.util.*;
 
+@Entity
 public class Role {
+   @Id
+   @GeneratedValue(strategy= GenerationType.AUTO)
    private Long id;
    private String name;
    @OneToMany
    private List<Account> accounts;
+
+   public Role() {
+   }
 
    public Role(Long id, String name) {
       this.id = id;

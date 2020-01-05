@@ -1,13 +1,26 @@
-package ma.irisi.ocr.model; /***********************************************************************
+package ma.irisi.ocr.model;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+/***********************************************************************
  * Module:  MetaData.java
  * Author:  ELIOT
  * Purpose: Defines the Class MetaData
  ***********************************************************************/
 
+@Entity
 public class MetaData {
+   @Id
+   @GeneratedValue(strategy= GenerationType.AUTO)
    private Long id;
    private String key;
    private String value;
+
+   public MetaData() {
+   }
 
    public MetaData(Long id, String key, String value) {
       this.id = id;
