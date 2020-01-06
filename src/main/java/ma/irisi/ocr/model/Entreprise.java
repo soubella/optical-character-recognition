@@ -29,7 +29,12 @@ public class Entreprise {
       this.user = user;
       this.plan = plan;
    }
+   public Entreprise(Long id, String name, Plan plan) {
+      this.id = id;
+      this.name = name;
 
+      this.plan = plan;
+   }
    public Long getId() {
       return id;
    }
