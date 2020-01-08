@@ -1,7 +1,4 @@
 package ma.irisi.ocr.controller;
-import ma.irisi.ocr.model.Entreprise;
-import ma.irisi.ocr.model.Plan;
-import ma.irisi.ocr.model.Role;
 import ma.irisi.ocr.model.User;
 import ma.irisi.ocr.repository.EntrepriseRepository;
 import ma.irisi.ocr.repository.RoleRepository;
@@ -23,12 +20,8 @@ public class UserController {
     EntrepriseRepository entrepriseRepository;
     @Autowired
     RoleRepository roleRepository ;
-    @RequestMapping("test")
-    public String test() {
-        return "Hello dear";
-    }
 
-    @GetMapping("/users")
+    @GetMapping("/users/api")
     public List<User> index(){
         return userRepository.findAll();
     }
@@ -44,7 +37,6 @@ public class UserController {
         return true;
     }
 
-    @CrossOrigin(origins = "*")
     @PostMapping(path= "/users/register", consumes = "application/json", produces = "application/json")
     public ResponseEntity<Object> addUser(@RequestBody User user)
             throws Exception
@@ -79,8 +71,4 @@ public class UserController {
         return ""+user.getId()+"-"+user.getEntreprise().getId();
     }
 
-    @GetMapping("/users/list")
-    public List findAll(){
-        return userRepository.findAll();
-    }
 }
