@@ -11,20 +11,15 @@ import javax.persistence.*;
 @Entity
 public class MetaData {
    @Id
-   @GeneratedValue(strategy= GenerationType.AUTO)
+   @GeneratedValue(strategy= GenerationType.IDENTITY)
    private Long id;
    private String keyMeta;
+   @Column(length=500000)
    private String valueMeta;
    @ManyToOne
    private UploadedFile uploadedFile;
 
    public MetaData() {
-   }
-
-   public MetaData(Long id, String keyMeta, String valueMeta) {
-      this.id = id;
-      this.keyMeta = keyMeta;
-      this.valueMeta = valueMeta;
    }
 
    public Long getId() {

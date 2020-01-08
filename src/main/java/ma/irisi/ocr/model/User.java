@@ -4,26 +4,29 @@ package ma.irisi.ocr.model; /***************************************************
  * Purpose: Defines the Class User
  ***********************************************************************/
 
-
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 
 @Entity
 public class User {
    @Id
-   @GeneratedValue(strategy= GenerationType.AUTO)
+   @GeneratedValue(strategy= GenerationType.IDENTITY)
    private Long id;
    private String firstName;
    private String lastName;
+   @Column(unique=true)
    private String email;
    private String password;
    private boolean state;
    @ManyToOne
+   @JsonIgnore
    private Role role;
    @ManyToOne
+   @JsonIgnore
    private  Entreprise entreprise;
 
-   public User() {
+   public User() {   
    }
 
    public Long getId() {

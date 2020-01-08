@@ -4,30 +4,25 @@ package ma.irisi.ocr.model; /***************************************************
  * Purpose: Defines the Class Entreprise
  ***********************************************************************/
 
+import org.springframework.data.rest.core.annotation.RestResource;
+
 import javax.persistence.*;
 import java.util.*;
 
 @Entity
 public class Entreprise {
    @Id
-   @GeneratedValue(strategy= GenerationType.AUTO)
+   @GeneratedValue(strategy= GenerationType.IDENTITY)
    private Long id;
    private String name;
    @OneToMany(mappedBy = "entreprise")
-   public List<User> user;
-   @ManyToOne
-   public Plan plan;
+   private List<User> user;
+   @ManyToOne(cascade = CascadeType.ALL)
+   private Plan plan;
    @OneToMany(mappedBy = "entreprise")
-   public List<UploadedFile> uploadedFile;
+   private List<UploadedFile> uploadedFile;
 
    public Entreprise() {
-   }
-
-   public Entreprise(Long id, String name, List user, Plan plan) {
-      this.id = id;
-      this.name = name;
-      this.user = user;
-      this.plan = plan;
    }
 
    public Long getId() {

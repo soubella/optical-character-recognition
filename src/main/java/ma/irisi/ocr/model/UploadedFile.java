@@ -4,29 +4,28 @@ package ma.irisi.ocr.model; /***************************************************
  * Purpose: Defines the Class UploadedFile
  ***********************************************************************/
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.*;
 
 @Entity
 public class UploadedFile {
    @Id
-   @GeneratedValue(strategy= GenerationType.AUTO)
+   @GeneratedValue(strategy= GenerationType.IDENTITY)
    private Long id;
    private String type;
    private Long size;
+   private String extension;
 
    @ManyToOne
+   @JsonIgnore
    private Entreprise entreprise;
    @OneToMany(mappedBy = "uploadedFile")
+   @JsonIgnore
    public List<MetaData> metaData;
 
    public UploadedFile() {
-   }
-
-   public UploadedFile(Long id, String type, Long size) {
-      this.id = id;
-      this.type = type;
-      this.size = size;
    }
 
    public Long getId() {
@@ -51,6 +50,14 @@ public class UploadedFile {
 
    public void setSize(Long size) {
       this.size = size;
+   }
+
+   public String getExtension() {
+      return extension;
+   }
+
+   public void setExtension(String extension) {
+      this.extension = extension;
    }
 
    public List<MetaData> getMetaData() {

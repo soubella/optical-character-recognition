@@ -9,20 +9,14 @@ import java.util.*;
 @Entity
 public class Plan {
    @Id
-   @GeneratedValue(strategy= GenerationType.AUTO)
+   @GeneratedValue(strategy= GenerationType.IDENTITY)
    private Long id;
    private String name;
    private Double price;
    @OneToMany(mappedBy = "plan")
-   List<Entreprise> entreprises;
+   private Set<Entreprise> entreprises;
 
    public Plan() {
-   }
-
-   public Plan(Long id, String name, Double price) {
-      this.id = id;
-      this.name = name;
-      this.price = price;
    }
 
    public Long getId() {
@@ -49,11 +43,11 @@ public class Plan {
       this.price = price;
    }
 
-   public List<Entreprise> getEntreprises() {
+   public Set<Entreprise> getEntreprises() {
       return entreprises;
    }
 
-   public void setEntreprises(List<Entreprise> entreprises) {
+   public void setEntreprises(Set<Entreprise> entreprises) {
       this.entreprises = entreprises;
    }
 }

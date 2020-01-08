@@ -10,18 +10,13 @@ import java.util.*;
 @Entity
 public class Role {
    @Id
-   @GeneratedValue(strategy= GenerationType.AUTO)
+   @GeneratedValue(strategy= GenerationType.IDENTITY)
    private Long id;
    private String name;
    @OneToMany(mappedBy = "role")
    private List<User> users;
 
    public Role() {
-   }
-
-   public Role(Long id, String name) {
-      this.id = id;
-      this.name = name;
    }
 
    public Long getId() {
