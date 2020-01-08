@@ -50,16 +50,14 @@ public class UserController {
             throws Exception
     {
 
-        System.out.println(user.getId());
+      /*  System.out.println(user.getId());
         //add resource
         Long ent =new Long(1);
         Double prix = new Double(200);
-        /*   Optional<Entreprise> entreprise = entrepriseRepository.findById(ent) ;*/
+        Optional<Entreprise> entreprise = entrepriseRepository.findById(ent) ;
         user.setEntreprise((new Entreprise(ent,"irisi",new Plan(ent,"",prix))));
         user.setRole(new Role(ent,"Admin"));
-
-        userRepository.save(user);
-
+        userReposit*/
 
         //Create resource location
         URI location = ServletUriComponentsBuilder.fromCurrentRequest()
