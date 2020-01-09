@@ -73,11 +73,11 @@ public class UserController {
         User user = userRepository.findUserByEmailAndPassword(email,password);
         if(user==null)
         {
-            System.out.println("NO niit");
+
 
             return "NO";
         }
-        System.out.println(""+user.getId()+"-"+user.getEntreprise().getId());
+        System.out.println(""+user.getId()+"-");
         return ""+user.getId()+"-"+user.getEntreprise().getId();
     }
 

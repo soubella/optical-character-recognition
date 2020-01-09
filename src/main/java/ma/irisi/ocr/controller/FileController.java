@@ -202,4 +202,10 @@ public class FileController {
         javaMailSender.send(msg);
         System.out.println("Email has been sent");
     }
+    @GetMapping("filedel/{id}")
+    public boolean delete(@PathVariable String id){
+        Long fileID = Long.parseLong(id);
+        uploadedFileRepository.deleteById(fileID);
+        return true;
+    }
 }
