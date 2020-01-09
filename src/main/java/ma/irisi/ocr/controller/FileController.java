@@ -14,6 +14,8 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 import org.slf4j.Logger;
@@ -28,10 +30,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
@@ -73,6 +72,27 @@ public class FileController {
         metaData.setValueMeta(ocrResult);
         metaData.setUploadedFile(uploadedFile);
         metaDataRepository.save(metaData);
+
+        String type="Invoice";
+        if(type.equals("Invoice")){
+            Map<String, String> map = new HashMap<String, String>();
+            String[] arrOfStr = ocrResult.split("\n");
+            map.put("address",arrOfStr[0]);
+            map.put("email",arrOfStr[1]);
+            map.put("phone",arrOfStr[2]);
+            map.put("company",arrOfStr[3]);
+            map.put("total",arrOfStr[arrOfStr.length-1].replaceAll("[^0-9.]", ""));
+            map.put("invoiceNo",arrOfStr[4].replaceAll("[^0-9.]", ""));
+            map.put("customer",arrOfStr[4].replaceAll("Bill To|:|Invoice No|\\d", ""));
+
+            for (String key : map.keySet()) {
+                MetaData newMetaData = new MetaData();
+                newMetaData.setKeyMeta(key);
+                newMetaData.setValueMeta(map.get(key));
+                newMetaData.setUploadedFile(uploadedFile);
+                metaDataRepository.save(newMetaData);
+            }
+        }
 
         try {
             fileName=uploadedFile.getId().toString()+"."+extension;
@@ -162,5 +182,23 @@ public class FileController {
             ex.printStackTrace();
         }
         return result;
+    }
+
+    @Autowired
+    private JavaMailSender javaMailSender;
+
+    @PostMapping("/users/mail")
+    public String mail(@RequestParam("email") String email,@RequestParam("fileId") String fileId){
+        sendMail(email,"",fileId);
+        return "OK";
+    }
+
+    public void sendMail(String email,String subject,String fileId){
+        SimpleMailMessage msg = new SimpleMailMessage();
+        msg.setTo(email);
+        msg.setSubject("Testing from Spring Boot");
+        msg.setText("Hello World \n Spring Boot Email");
+        javaMailSender.send(msg);
+        System.out.println("Email has been sent");
     }
 }
