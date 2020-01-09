@@ -155,6 +155,19 @@ public class FileController {
                 .body(resource);
     }
 
+    @GetMapping("files")
+    public List findAll(){
+        return uploadedFileRepository.findAll();
+    }
+
+    public static File convert(MultipartFile file) throws IOException {
+        File convFile = new File(file.getOriginalFilename());
+        convFile.createNewFile();
+        FileOutputStream fos = new FileOutputStream(convFile);
+        fos.write(file.getBytes());
+        fos.close();
+        return convFile;
+    }
 
     public String doOcr(MultipartFile fileIn){
         String result="";
