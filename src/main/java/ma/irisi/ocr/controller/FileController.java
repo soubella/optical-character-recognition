@@ -41,6 +41,7 @@ import javax.servlet.http.HttpServletRequest;
 @RestController
 public class FileController {
     private static final Logger logger = LoggerFactory.getLogger(FileController.class);
+    
     private static final String uploadDir = "\\home\\me\\IdeaProjects\\optical-character-recognition\\src\\main\\resources\\uploads";
 
     @Autowired
