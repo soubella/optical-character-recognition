@@ -1,14 +1,17 @@
 package ma.irisi.ocr.controller;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import ma.irisi.ocr.model.User;
 import ma.irisi.ocr.repository.EntrepriseRepository;
 import ma.irisi.ocr.repository.RoleRepository;
 import ma.irisi.ocr.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
+import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 @CrossOrigin(origins = "*")
@@ -21,16 +24,19 @@ public class UserController {
     @Autowired
     RoleRepository roleRepository ;
 
-    @GetMapping("/users/api")
-    public List<User> index(){
-        return userRepository.findAll();
+
+    @RequestMapping(value = "/users/api" ,   method = RequestMethod.GET)
+    public List<User> search(){
+        return (List<User>) userRepository.findAll();
     }
     @GetMapping("/user/{id}")
     public Optional<User> show(@PathVariable String id){
         Long userId = Long.parseLong(id);
         return userRepository.findById(userId);
     }
-    @DeleteMapping("user/{id}")
+
+
+    @GetMapping("userdel/{id}")
     public boolean delete(@PathVariable String id){
         Long userId = Long.parseLong(id);
         userRepository.deleteById(userId);
@@ -63,12 +69,17 @@ public class UserController {
 
     @PostMapping("/users/login")
     public String findUser(@RequestParam("email") String email, @RequestParam("password") String password) {
-        System.out.println(email);
-        System.out.println(password);
+
         User user = userRepository.findUserByEmailAndPassword(email,password);
         if(user==null)
+        {
+            System.out.println("NO niit");
+
             return "NO";
+        }
+        System.out.println(""+user.getId()+"-"+user.getEntreprise().getId());
         return ""+user.getId()+"-"+user.getEntreprise().getId();
     }
+
 
 }

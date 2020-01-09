@@ -5,8 +5,11 @@ package ma.irisi.ocr.model; /***************************************************
  ***********************************************************************/
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import ma.irisi.ocr.repository.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class User {
@@ -20,14 +23,15 @@ public class User {
    private String password;
    private boolean state;
    @ManyToOne
-
+   @JsonIgnore
    private Role role;
    @ManyToOne
-
+   @JsonIgnore
    private  Entreprise entreprise;
 
    public User() {   
    }
+
 
    public Long getId() {
       return id;
@@ -92,4 +96,7 @@ public class User {
    public void setEntreprise(Entreprise entreprise) {
       this.entreprise = entreprise;
    }
+
+
+
 }

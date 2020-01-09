@@ -7,6 +7,5 @@ import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.CrossOrigin;
 
 @CrossOrigin(origins = "*")
-@RepositoryRestResource
-public interface EntrepriseRepository extends JpaRepository<Entreprise,Long> {
+ public interface EntrepriseRepository extends JpaRepository<Entreprise,Long> {
 }

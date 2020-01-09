@@ -41,7 +41,7 @@ import javax.servlet.http.HttpServletRequest;
 @RestController
 public class FileController {
     private static final Logger logger = LoggerFactory.getLogger(FileController.class);
-    private static final String uploadDir = "C:\\Users\\ELIOT\\IdeaProjects\\optical-character-recognition\\src\\main\\resources\\uploads";
+    private static final String uploadDir = "\\home\\me\\IdeaProjects\\optical-character-recognition\\src\\main\\resources\\uploads";
 
     @Autowired
     private UploadedFileRepository uploadedFileRepository;
@@ -171,7 +171,7 @@ public class FileController {
     public String doOcr(MultipartFile fileIn){
         String result="";
         Tesseract instance = new Tesseract();
-        instance.setDatapath("C:\\Program Files (x86)\\Tesseract-OCR\\tessdata");
+        instance.setDatapath("\\home\\me\\Tesseract-OCR\\tessdata");
         instance.setLanguage("eng");
         instance.setHocr(false);
 
