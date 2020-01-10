@@ -12,10 +12,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
-import java.util.Collection;
-import java.util.List;
-import java.util.Optional;
-import java.util.Random;
+import java.util.*;
+
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 
@@ -30,9 +28,18 @@ public class UserController {
     RoleRepository roleRepository ;
 
 
-    @RequestMapping(value = "/users/api" ,   method = RequestMethod.GET)
-    public List<User> search(){
-        return (List<User>) userRepository.findAll();
+    @RequestMapping(value = "/users/api/{id}" ,   method = RequestMethod.GET)
+    public List<User> search(@PathVariable String id){
+        List<User> users = userRepository.findAll();
+        List<User> users2=new ArrayList<>();
+        for (User user:users) {
+            if(user.getEntreprise().getId().toString().equals(id)){
+                user.setEntreprise(null);
+                user.setRole(null);
+                users2.add(user);
+            }
+        }
+        return users2;
     }
     @GetMapping("/user/{id}")
     public Optional<User> show(@PathVariable String id){
@@ -91,7 +98,7 @@ public class UserController {
         for (int i = 0; i < 6; i++) {
             sb.append(AB.charAt(rnd.nextInt(AB.length())));
         }
-        //sendMail(email,"Password for OCR Dashboard",sb.toString());
+        sendMail(email,"Password for OCR Dashboard",sb.toString());
         return sb.toString();
     }
     @Autowired
@@ -100,7 +107,7 @@ public class UserController {
         SimpleMailMessage msg = new SimpleMailMessage();
         msg.setTo(email);
         msg.setSubject(subject);
-        msg.setText("Hello  \n This is your password :'"+pass+"'");
+        msg.setText("Hello,  \nThis is your login :\nEmail: '"+email+"'"+"\nThis is your Password: '"+pass+"'");
         javaMailSender.send(msg);
         System.out.println("Email has been sent");
     }

@@ -23,10 +23,10 @@ public class User {
    private String password;
    private boolean state;
    @ManyToOne
-   @JsonIgnore
+   //@JsonIgnore
    private Role role;
    @ManyToOne
-   @JsonIgnore
+   //@JsonIgnore
    private  Entreprise entreprise;
 
    public User() {   
