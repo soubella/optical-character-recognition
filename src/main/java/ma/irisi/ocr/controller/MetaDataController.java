@@ -16,8 +16,6 @@ public class MetaDataController {
     @Autowired
     private UserController userService;
 
-    @Autowired
-    private User user;
 
     @PostMapping(value = "/addNote")
     public ModelAndView createNote(@RequestParam(value = "subject") String subject, @RequestParam(value = "text") String text, @RequestParam(value = "id") String id) {
