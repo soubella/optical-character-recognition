@@ -7,6 +7,7 @@ import ma.irisi.ocr.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.mail.SimpleMailMessage;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -14,6 +15,10 @@ import java.net.URI;
 import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
+import java.util.Random;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
+
 @CrossOrigin(origins = "*")
 @RestController
 public class UserController {
@@ -73,13 +78,31 @@ public class UserController {
         User user = userRepository.findUserByEmailAndPassword(email,password);
         if(user==null)
         {
-
-
             return "NO";
         }
         System.out.println(""+user.getId()+"-");
         return ""+user.getId()+"-"+user.getEntreprise().getId();
     }
-
+    @GetMapping("user_pass/{email}/{state}")
+    public String password(@PathVariable String email,@PathVariable String state){
+        String AB = "0123456789abcdefghijklmnopqrstuvwxyz";
+        Random rnd = new Random();
+        StringBuilder sb = new StringBuilder(6);
+        for (int i = 0; i < 6; i++) {
+            sb.append(AB.charAt(rnd.nextInt(AB.length())));
+        }
+        //sendMail(email,"Password for OCR Dashboard",sb.toString());
+        return sb.toString();
+    }
+    @Autowired
+    private JavaMailSender javaMailSender;
+    public void sendMail(String email,String subject,String pass){
+        SimpleMailMessage msg = new SimpleMailMessage();
+        msg.setTo(email);
+        msg.setSubject(subject);
+        msg.setText("Hello  \n This is your password :'"+pass+"'");
+        javaMailSender.send(msg);
+        System.out.println("Email has been sent");
+    }
 
 }
